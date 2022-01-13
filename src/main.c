@@ -16,25 +16,25 @@
 #define LED_LOW  GPIO_WriteLow(LED_PORT, LED_PIN)
 #define LED_TOGG GPIO_WriteReverse(LED_PORT, LED_PIN)
 /////////////////////////////////////////////////////////////////////////////// stepper motor 
-#define A1_PORT GPIOA
-#define A1_PIN  GPIO_PIN_1
+#define A1_PORT GPIOF
+#define A1_PIN  GPIO_PIN_7
 #define A1_HIGH   GPIO_WriteHigh(A1_PORT, A1_PIN)
 #define A1_LOW  GPIO_WriteLow(A1_PORT, A1_PIN)
 #define A1_R GPIO_WriteReverse(A1_PORT, A1_PIN)
 
-#define A2_PORT GPIOA
-#define A2_PIN  GPIO_PIN_2
+#define A2_PORT GPIOF
+#define A2_PIN  GPIO_PIN_6
 #define A2_HIGH   GPIO_WriteHigh(A2_PORT, A2_PIN)
 #define A2_LOW  GPIO_WriteLow(A2_PORT, A2_PIN)
 #define A2_R GPIO_WriteReverse(A2_PORT, A2_PIN)
 
-#define A3_PORT GPIOA
-#define A3_PIN  GPIO_PIN_3
+#define A3_PORT GPIOF
+#define A3_PIN  GPIO_PIN_5
 #define A3_HIGH   GPIO_WriteHigh(A3_PORT, A3_PIN)
 #define A3_LOW  GPIO_WriteLow(A3_PORT, A3_PIN)
 #define A3_R GPIO_WriteReverse(A3_PORT, A3_PIN)
 
-#define A4_PORT GPIOA
+#define A4_PORT GPIOF
 #define A4_PIN  GPIO_PIN_4
 #define A4_HIGH   GPIO_WriteHigh(A4_PORT, A4_PIN)
 #define A4_LOW  GPIO_WriteLow(A4_PORT, A4_PIN)
@@ -121,48 +121,51 @@ int main(void)
             printf("  RIGHT ");  
                   
             //1 step
-            A1_HIGH; 
-            
-            delay_ms(50);
+            A1_HIGH;             
+            delay_ms(3);
             //2 step
             A1_LOW; 
             A2_HIGH;
-            
-            delay_ms(50); 
+            delay_ms(3); 
             //3 step
-            
             A2_LOW;
             A3_HIGH;
-            
-            delay_ms(50);
+            delay_ms(3);
             //4 step
-            
             A3_LOW;
             A4_HIGH; 
-            delay_ms(50);
+            delay_ms(3);
             A4_LOW;
-
-            
-            
-            LED_HIGH; 
-            delay_ms(50);
-            LED_LOW; 
-
-            printf("  konec2 "); 
-
 
         }
         if (adc_valuex < 500) {
-            printf("  LEFT ");             
+            printf("  LEFT "); 
+
+            //1 step
+            A4_HIGH;             
+            delay_ms(3);
+            //2 step
+            A4_LOW; 
+            A3_HIGH;
+            delay_ms(3); 
+            //3 step
+            A3_LOW;
+            A2_HIGH;
+            delay_ms(3);
+            //4 step
+            A2_LOW;
+            A1_HIGH; 
+            delay_ms(3);
+            A1_LOW;
+
         }
         if (adc_valuey < 500) {
-            printf("  UP ");            
+            printf("  UP ");   
+
         }
         if (adc_valuey > 1000) {
             printf("  DOWN ");  
-
-
-           
+     
         }
         printf("\r\n");
 
@@ -170,7 +173,7 @@ int main(void)
 
 
 
-        
+        /*
         if (milis() - time > 333 && BTN_PUSH) {
             LED_TOGG; 
             time = milis();
@@ -182,6 +185,7 @@ int main(void)
         //LED_TOGG; 
         //delay_ms(333);
         //printf("Funguje to!!!\n");
+        */
     }
 }
 
