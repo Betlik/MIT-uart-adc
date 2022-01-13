@@ -1,5 +1,6 @@
 #include "stm8s.h"
 #include "milis.h"
+#include "swi2c.h"
 
 /*#include "delay.h"*/
 #include <stdio.h>
@@ -24,23 +25,33 @@ void setup(void)
     CLK_HSIPrescalerConfig(CLK_PRESCALER_HSIDIV1);      // taktovani MCU na 16MHz
     GPIO_Init(LED_PORT, LED_PIN, GPIO_MODE_OUT_PP_LOW_SLOW);
     init_milis();
+    swi2c_init();
 }
 
 
 int main(void)
 {
     uint32_t time = 0;
+    uint32_t cum = 69;
+    uint8_t present;
+    uint8_t error;
+    uint8_t precteno[4];
 
     setup();
     init_uart();
 
     while (1) {
 
+        present = swi2c_test_slave(0x68<<1);
+        error = swi2c_read_buf(0x68<<1,0x0e,precteno,1);
+
+        printf(precteno);
+        printf(cum);
         if (milis() - time > 333 && BTN_PUSH) {
             LED_TOGG; 
             time = milis();
 
-            printf("Ahoj\r\n");
+            printf("ssss𓆏\r\n");
 
 
         }
