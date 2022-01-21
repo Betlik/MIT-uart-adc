@@ -162,9 +162,11 @@ int main(void)
         if (adc_valuey < 500) {
             printf("  UP ");   
 
+
         }
         if (adc_valuey > 1000) {
-            printf("  DOWN ");  
+            printf("  DOWN ");
+              
      
         }
         printf("\r\n");
